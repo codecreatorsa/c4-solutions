@@ -7,16 +7,32 @@ if (mobileBtn) {
     });
 }
 
-// Error msg for tel num
-const phoneInput = document.getElementById("phone");
-const errorMsg = document.getElementById("error-msg");
+/* ============================================ */
+/* SIMPLE TELEPHONE VALIDATION - 11 DIGITS ONLY */
+/* ============================================ */
 
-phoneInput.addEventListener("input", function(){
-   if (this.value.length > 0){
-       errorMsg.style.display = "block";
-   }else{
-       errorMsg.style.display = "none";
-   }
+const phoneFields = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+
+phoneFields.forEach(field => {
+    field.addEventListener('input', function() {
+        // Remove all non-digits
+        let numbers = this.value.replace(/\D/g, '');
+        
+        // Cut off at 11 digits
+        if (numbers.length > 11) {
+            numbers = numbers.slice(0, 11);
+        }
+        
+        // Update field
+        this.value = numbers;
+    });
+    
+    field.addEventListener('paste', function(e) {
+        e.preventDefault();
+        let pasted = (e.clipboardData || window.clipboardData).getData('text');
+        let numbers = pasted.replace(/\D/g, '').slice(0, 11);
+        this.value = numbers;
+    });
 });
 
 // FAQ accordion
