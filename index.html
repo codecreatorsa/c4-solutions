@@ -225,7 +225,8 @@
             <input type="text" name="surname" placeholder="Last Name / Surname" required>
             <input type="text" name="job_title" placeholder="Job Title" required>
             <input type="text" name="company_name" placeholder="Company Name" required>
-            <input type="tel" name="telephone_no" maxlength="10" placeholder="Telephone Number" required>
+            <input type="tel" id="phone" name="telephone_no" maxlength="10" placeholder="Telephone Number" required>
+            <span id="error-msg">Only 10 numbers allowed!</span>
             
             <select name="employees_count" required>
                 <option value="" disabled selected>Number of Employees</option>
