@@ -7,6 +7,18 @@ if (mobileBtn) {
     });
 }
 
+// Error msg for tel num
+const phoneInput = document.getElementById("phone");
+const errorMsg = document.getElementById("error-msg");
+
+phoneInput.addEventListener("input", function(){
+   if (this.value.length > 0){
+       errorMsg.style.display = "block";
+   }else{
+       errorMsg.style.display = "none";
+   }
+});
+
 // FAQ accordion
 const faqItems = document.querySelectorAll('.faq-item');
 faqItems.forEach(item => {
