@@ -7,73 +7,136 @@ if (mobileBtn) {
     });
 }
 
-/* ============================================ */
-/* SIMPLE TELEPHONE VALIDATION - 11 DIGITS ONLY */
-/* ============================================ */
+// Function to validate phone number (exactly 11 digits)
+function validatePhoneNumber(phoneValue) {
+    // Remove any non-digit characters for validation only
+    const digits = phoneValue.replace(/\D/g, '');
+    return digits.length === 11;
+}
 
-const phoneFields = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+// Function to show error message
+function showPhoneError(inputField, message) {
+    // Remove any existing error message
+    const existingError = inputField.parentElement.querySelector('.phone-error');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Add error styling
+    inputField.style.borderColor = '#dc3545';
+    inputField.style.backgroundColor = '#fff5f5';
+    
+    // Create error message
+    const errorMsg = document.createElement('small');
+    errorMsg.className = 'phone-error';
+    errorMsg.style.color = '#dc3545';
+    errorMsg.style.fontSize = '0.7rem';
+    errorMsg.style.display = 'block';
+    errorMsg.style.marginTop = '4px';
+    errorMsg.innerHTML = message;
+    inputField.parentElement.appendChild(errorMsg);
+}
 
-phoneFields.forEach(field => {
-    field.addEventListener('input', function() {
-        // Remove all non-digits
-        let numbers = this.value.replace(/\D/g, '');
-        
-        // Cut off at 11 digits
-        if (numbers.length > 11) {
-            numbers = numbers.slice(0, 11);
-        }
-        
-        // Update field
-        this.value = numbers;
+// Function to clear phone error
+function clearPhoneError(inputField) {
+    const existingError = inputField.parentElement.querySelector('.phone-error');
+    if (existingError) {
+        existingError.remove();
+    }
+    inputField.style.borderColor = '#ccc';
+    inputField.style.backgroundColor = 'white';
+}
+
+// Get all telephone input fields
+const telephoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
+
+// Remove any automatic trimming - let user type freely
+telephoneInputs.forEach(input => {
+    // Remove any existing input restrictions
+    input.removeAttribute('maxlength');
+    input.removeAttribute('pattern');
+    
+    // Clear error when user starts typing
+    input.addEventListener('input', function() {
+        clearPhoneError(this);
     });
     
-    field.addEventListener('paste', function(e) {
-        e.preventDefault();
-        let pasted = (e.clipboardData || window.clipboardData).getData('text');
-        let numbers = pasted.replace(/\D/g, '').slice(0, 11);
-        this.value = numbers;
+    // Clear error when field gets focus
+    input.addEventListener('focus', function() {
+        clearPhoneError(this);
     });
 });
 
-// FAQ accordion
-const faqItems = document.querySelectorAll('.faq-item');
-faqItems.forEach(item => {
-    item.addEventListener('click', () => {
-        item.classList.toggle('active');
-    });
-});
+/* ============================================ */
+/* FORM SUBMISSION - CHECK FOR EXACTLY 11 DIGITS */
+/* ============================================ */
 
-// MODAL FUNCTIONALITY - for ALL buttons with data-quote-type
-const modal = document.getElementById('quoteModal');
-const modalTitle = document.getElementById('modalTitle');
-const inquiryTypeInput = document.getElementById('inquiryType');
-const closeModalBtn = document.querySelector('.close-modal');
+// For modal popup form
 const popupForm = document.getElementById('popupForm');
-
-// Get ALL buttons that have data-quote-type (every Request/Demo/Quote/Chat button)
-const ctaButtons = document.querySelectorAll('[data-quote-type]');
-
-// Open modal when any CTA button is clicked
-ctaButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inquiryType = button.getAttribute('data-quote-type');
-        inquiryTypeInput.value = inquiryType;
-        modalTitle.textContent = inquiryType;
-        modal.style.display = 'block';
+if (popupForm) {
+    popupForm.addEventListener('submit', function(e) {
+        const phoneField = this.querySelector('input[name="phone"]');
         
-        // Clear previous form feedback and reset form
-        const feedbackDiv = document.getElementById('formFeedback');
-        feedbackDiv.style.display = 'none';
-        feedbackDiv.innerHTML = '';
-        feedbackDiv.className = 'form-message';
-        
-        // Reset form
-        popupForm.reset();
+        if (phoneField) {
+            const phoneValue = phoneField.value;
+            const digits = phoneValue.replace(/\D/g, '');
+            
+            // Check if exactly 11 digits
+            if (digits.length !== 11) {
+                e.preventDefault();
+                
+                let errorMessage = '';
+                if (digits.length === 0) {
+                    errorMessage = '⚠️ Please enter your phone number.';
+                } else if (digits.length < 11) {
+                    errorMessage = `⚠️ You entered ${digits.length} digit(s). Please enter exactly 11 digits.`;
+                } else if (digits.length > 11) {
+                    errorMessage = `⚠️ You entered ${digits.length} digits. Please enter exactly 11 digits.`;
+                }
+                
+                showPhoneError(phoneField, errorMessage);
+                
+                // Scroll to top of modal
+                const modalContent = document.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.scrollTop = 0;
+                }
+                return false;
+            }
+        }
+        return true;
     });
-});
+}
 
-// Close modal when X is clicked
+// For any other forms on the page (contact forms, etc.)
+const otherForms = document.querySelectorAll('form:not(#popupForm)');
+otherForms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+        const phoneField = this.querySelector('input[type="tel"], input[name="phone"]');
+        
+        if (phoneField) {
+            const phoneValue = phoneField.value;
+            const digits = phoneValue.replace(/\D/g, '');
+            
+            if (digits.length !== 11) {
+                e.preventDefault();
+                
+                let errorMessage = '';
+                if (digits.length === 0) {
+                    errorMessage = '⚠️ Please enter your phone number.';
+                } else if (digits.length < 11) {
+                    errorMessage = `⚠️ You entered ${digits.length} digit(s). South African numbers require 11 digits (e.g., 07123456789).`;
+                } else if (digits.length > 11) {
+                    errorMessage = `⚠️ You entered ${digits.length} digits. Please enter exactly 11 digits.`;
+                }
+                
+                showPhoneError(phoneField, errorMessage);
+                return false;
+            }
+        }
+        return true;
+    });
+});// Close modal when X is clicked
 if (closeModalBtn) {
     closeModalBtn.onclick = function() {
         modal.style.display = 'none';
