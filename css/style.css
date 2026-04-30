@@ -181,6 +181,32 @@ header {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+/* Phone input validation styles */
+input[type="tel"]:valid {
+    border-color: #28a745;
+    background-color: #f0fff4;
+}
+
+input[type="tel"]:invalid {
+    border-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+.phone-error {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Info Card (Hero right panel) */
 .info-card {
     background: #fff;
