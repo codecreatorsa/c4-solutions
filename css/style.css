@@ -181,32 +181,6 @@ header {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-/* Phone input validation styles */
-input[type="tel"]:valid {
-    border-color: #28a745;
-    background-color: #f0fff4;
-}
-
-input[type="tel"]:invalid {
-    border-color: #dc3545;
-    background-color: #fff5f5;
-}
-
-.phone-error {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Info Card (Hero right panel) */
 .info-card {
     background: #fff;
@@ -438,12 +412,12 @@ footer {
 /* MODAL / POPUP STYLES */
 .modal {
     display: none;
-    z-index: 1000;
     position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
-    height: 10%;
+    height: 100%;
     background-color: rgba(0,0,0,0.5);
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
