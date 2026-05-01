@@ -1,135 +1,16 @@
-// mobile toggle
-const mobileBtn = document.getElementById('mobileMenuBtn');
-const navLinks = document.getElementById('navLinks');
-if (mobileBtn) {
-    mobileBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-    });
-}
-
-// FAQ accordion
-const faqItems = document.querySelectorAll('.faq-item');
-faqItems.forEach(item => {
-    item.addEventListener('click', () => {
-        item.classList.toggle('active');
-    });
-});
-
-// MODAL FUNCTIONALITY - for ALL buttons with data-quote-type
-const modal = document.getElementById('quoteModal');
-const modalTitle = document.getElementById('modalTitle');
-const inquiryTypeInput = document.getElementById('inquiryType');
-const closeModalBtn = document.querySelector('.close-modal');
-const popupForm = document.getElementById('popupForm');
-
-// Get ALL buttons that have data-quote-type (every Request/Demo/Quote/Chat button)
-const ctaButtons = document.querySelectorAll('[data-quote-type]');
-
-// Open modal when any CTA button is clicked
-ctaButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inquiryType = button.getAttribute('data-quote-type');
-        inquiryTypeInput.value = inquiryType;
-        modalTitle.textContent = inquiryType;
-        modal.style.display = 'block';
-        
-        // Clear previous form feedback and reset form
-        const feedbackDiv = document.getElementById('formFeedback');
-        feedbackDiv.style.display = 'none';
-        feedbackDiv.innerHTML = '';
-        feedbackDiv.className = 'form-message';
-        
-        // Reset form
-        popupForm.reset();
-    });
-});
-
-// Close modal when X is clicked
-if (closeModalBtn) {
-    closeModalBtn.onclick = function() {
-        modal.style.display = 'none';
+ // Mobile Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinksEl = document.getElementById('navLinks');
+    if(mobileBtn) {
+        mobileBtn.addEventListener('click', () => navLinksEl.classList.toggle('show'));
     }
-}
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// Handle Formspree submission
-if (popupForm) {
-    popupForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const form = e.target;
-        const formData = new FormData(form);
-        const feedbackDiv = document.getElementById('formFeedback');
-        
-        // Show loading state
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = 'Sending...';
-        submitBtn.disabled = true;
-        
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                feedbackDiv.className = 'form-message success';
-                feedbackDiv.innerHTML = '✅ Thank you! Your request has been sent. We\'ll contact you soon.';
-                feedbackDiv.style.display = 'block';
-                form.reset();
-                
-                // Close modal after 2 seconds
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    feedbackDiv.style.display = 'none';
-                }, 2000);
-            } else {
-                const errorData = await response.json();
-                feedbackDiv.className = 'form-message error';
-                feedbackDiv.innerHTML = '❌ Oops! Something went wrong. Please email us directly at sales.c4tech@gmail.com';
-                feedbackDiv.style.display = 'block';
-            }
-        } catch (error) {
-            feedbackDiv.className = 'form-message error';
-            feedbackDiv.innerHTML = '❌ Network error. Please email us directly at sales.c4tech@gmail.com';
-            feedbackDiv.style.display = 'block';
-        } finally {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
-        }
-    });
-}
-
-// Active nav highlight on scroll
-const sections = document.querySelectorAll('section');
-const navItems = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if(pageYOffset >= sectionTop) {
-            current = section.getAttribute('id');
-        }
-    });
-    navItems.forEach(link => {
-        link.classList.remove('active');
-        if(link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => item.classList.toggle('active'));
     });
 
-     // ---------- TELEPHONE VALIDATION: ONLY 10 NUMBERS ALLOWED (no trimming, raw input validation) ----------
+    // ---------- TELEPHONE VALIDATION: ONLY 10 NUMBERS ALLOWED (no trimming, raw input validation) ----------
     const phoneInput = document.getElementById('phone');
     const errorMsgSpan = document.getElementById('error-msg');
     const digitCountSpan = document.getElementById('digitCountDisplay');
@@ -237,4 +118,56 @@ window.addEventListener('scroll', () => {
         });
     }
     
-});
+    // MODAL Logic for all CTA buttons
+    const modal = document.getElementById('quoteModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const inquiryTypeInput = document.getElementById('inquiryType');
+    const closeModalSpan = document.querySelector('.close-modal');
+    const ctaButtons = document.querySelectorAll('[data-quote-type]');
+    
+    ctaButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = btn.getAttribute('data-quote-type');
+            inquiryTypeInput.value = type;
+            modalTitle.textContent = type;
+            modal.style.display = 'block';
+            // Reset form and clear validation errors when modal opens
+            popupForm.reset();
+            const feedbackDiv = document.getElementById('formFeedback');
+            feedbackDiv.style.display = 'none';
+            feedbackDiv.innerHTML = '';
+            errorMsgSpan.classList.remove('show');
+            phoneInput.classList.remove('tel-input-error');
+            if(digitCountSpan) digitCountSpan.innerText = '0';
+        });
+    });
+    
+    if(closeModalSpan) {
+        closeModalSpan.onclick = () => modal.style.display = 'none';
+    }
+    window.onclick = (event) => {
+        if(event.target == modal) modal.style.display = 'none';
+    }
+    
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if(pageYOffset >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navItems.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // initial call for any prefill
+    validatePhone();
