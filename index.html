@@ -169,14 +169,46 @@
 
     <!-- CONTACT SECTION - MAP ONLY (FULL WIDTH) -->
     <section id="contact" class="section" style="background:#ffffff; padding-bottom: 0;">
-        <div class="container">
-            <div class="section-title">Find Us</div>
-            <div class="contact-details">
-                <p><i class="fas fa-phone-alt"></i> <strong>Phone:</strong> 064 841 8972</p>
-                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> sales.c4tech@gmail.com</p>
-                <p><i class="fas fa-building"></i> <strong>Physical address:</strong> 71 Maxwell Street, Kempton Park, Johannesburg, 1619</p>
+<!-- MODAL POPUP (FORMSPREE) with Telephone Validation: ONLY 10 NUMBERS ALLOWED -->
+<div id="quoteModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="modalTitle">Request a Quote</h3>
+        <form id="popupForm" action="https://formspree.io/f/mwvyebnn" method="POST">
+            <input type="hidden" name="inquiry_type" id="inquiryType" value="">
+            
+            <input type="text" name="name" placeholder="First Name" required>
+            <input type="text" name="surname" placeholder="Last Name / Surname" required>
+            <input type="text" name="job_title" placeholder="Job Title" required>
+            <input type="text" name="company_name" placeholder="Company Name" required>
+            
+            <!-- Telephone field with validation: only 10 digits allowed -->
+            <div class="tel-wrapper">
+                <input type="tel" id="phone" name="telephone_no" placeholder="Telephone Number (exactly 10 digits)" required autocomplete="off">
+                <span id="error-msg">
+                    <i class="fas fa-exclamation-circle"></i> Only 10 numbers are allowed! You entered <span id="digitCountDisplay">0</span> digit(s).
+                </span>
+                <small class="input-hint"><i class="fas fa-info-circle"></i> Please enter exactly 10 digits (e.g., 0839133030). No letters or symbols allowed.</small>
             </div>
-        </div>
+            
+            <select name="employees_count" required>
+                <option value="" disabled selected>Number of Employees</option>
+                <option value="1-10">1 - 10 employees</option>
+                <option value="11-50">11 - 50 employees</option>
+                <option value="51-200">51 - 200 employees</option>
+                <option value="201-500">201 - 500 employees</option>
+                <option value="500+">500+ employees</option>
+            </select>
+            
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="description" rows="4" placeholder="Tell us about your requirements, challenges, or what you'd like help with..." required></textarea>
+             
+            <button type="submit" class="btn" id="submitFormBtn">Send Request →</button>
+            <div id="formFeedback" class="form-message"></div>
+        </form>
+        <p class="modal-footer-note">We'll respond within 2 business hours.</p>
+    </div>
+</div>
         <div class="map-full">
             <iframe src="https://maps.google.com/maps?q=71+Maxwell+Street+Kempton+Park+Johannesburg&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
         </div>
