@@ -438,12 +438,11 @@ footer {
 /* MODAL / POPUP STYLES */
 .modal {
     display: none;
-    position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
-    height: 80%;
+    height: 100%;
     background-color: rgba(0,0,0,0.5);
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
