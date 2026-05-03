@@ -234,34 +234,33 @@
 
         /* Certification image styling - VERTICAL LAYOUT (column) */
         .cert-image {
-            margin-top: 1.5rem;
-            border-top: 1px solid #e0e8f0;
-            padding-top: 1.5rem;
-            /* VERTICAL flex column instead of horizontal row */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .cert-image img {
-            max-width: 110px;
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            object-fit: contain;
-            background: white;
-            padding: 8px;
-            display: block;
-        }
-
-        .cert-image img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
-        }
+                margin-top: 1.5rem;
+                border-top: 1px solid #e0e8f0;
+                padding-top: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+            }
+            
+            .cert-image img {
+                max-width: 180px;  /* MUCH LARGER on desktop */
+                width: 100%;
+                height: auto;
+                border-radius: 16px;
+                box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                object-fit: contain;
+                background: white;
+                padding: 12px;
+                display: block;
+            }
+            
+            .cert-image img:hover {
+                transform: scale(1.05);
+                box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+            }
 
         /* Cards Grid */
         .cards {
@@ -726,3 +725,44 @@
                 overflow-y: auto;
             }
         }
+@media (max-width: 900px) {
+    .cert-image img {
+        max-width: 200px;  /* Even larger on tablet */
+        padding: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cert-image {
+        gap: 20px;
+    }
+    .cert-image img {
+        max-width: 220px;  /* Bigger on mobile */
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cert-image {
+        gap: 18px;
+    }
+    .cert-image img {
+        max-width: 260px;  /* LARGEST on small phones - clear and readable */
+        padding: 12px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 375px) {
+    .cert-image img {
+        max-width: 240px;  /* Slightly smaller but still very large */
+        padding: 10px;
+    }
+}
+
+/* Landscape mode - maintain good size */
+@media (max-width: 850px) and (orientation: landscape) {
+    .cert-image img {
+        max-width: 160px;
+    }
+}
