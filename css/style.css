@@ -1,4 +1,5 @@
-* {
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -10,12 +11,16 @@
             color: #1a2c3e;
             line-height: 1.5;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* header & nav */
@@ -25,12 +30,29 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
         .logo img {
-            max-height: 95px;
+            max-height: 70px;
             width: auto;
             object-fit: contain;
+            transition: all 0.2s ease;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #1e88a8;
+            font-weight: 600;
+            background: #eef2fa;
+            padding: 4px 10px;
+            border-radius: 40px;
+            margin: 0;
         }
 
         .navbar {
@@ -38,12 +60,13 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            padding: 1rem 0;
+            padding: 0.75rem 0;
+            width: 100%;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.8rem;
             list-style: none;
             flex-wrap: wrap;
         }
@@ -133,7 +156,7 @@
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1.2rem;
@@ -167,7 +190,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
-        /* Info Card (Hero right panel) */
         .info-card {
             background: #fff;
             border-radius: 32px;
@@ -183,7 +205,6 @@
             margin: 1rem 0;
         }
 
-        /* Sections */
         .section {
             padding: 5rem 0;
         }
@@ -204,7 +225,6 @@
             margin-top: 10px;
         }
 
-        /* About Section - flex column on mobile via media query */
         .about-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -232,37 +252,37 @@
             font-size: 2rem;
         }
 
-        /* Certification image styling - VERTICAL LAYOUT (column) */
+        /* Certification Images - VERTICAL, FULLY RESPONSIVE, NO OVERFLOW */
         .cert-image {
-                margin-top: 1.5rem;
-                border-top: 1px solid #e0e8f0;
-                padding-top: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 24px;
-            }
-            
-            .cert-image img {
-                max-width: 180px;  /* MUCH LARGER on desktop */
-                width: 100%;
-                height: auto;
-                border-radius: 16px;
-                box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                object-fit: contain;
-                background: white;
-                padding: 12px;
-                display: block;
-            }
-            
-            .cert-image img:hover {
-                transform: scale(1.05);
-                box-shadow: 0 12px 22px rgba(0,0,0,0.15);
-            }
+            margin-top: 1.5rem;
+            border-top: 1px solid #e0e8f0;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            width: 100%;
+        }
+        
+        .cert-image img {
+            max-width: 160px;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: contain;
+            background: white;
+            padding: 12px;
+            display: block;
+        }
+        
+        .cert-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
+        }
 
-        /* Cards Grid */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -284,7 +304,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Price Cards */
         .price-card {
             background: #fff;
             border-radius: 28px;
@@ -299,7 +318,6 @@
             color: #1e88a8;
         }
 
-        /* FAQ */
         .faq-item {
             background: #f8fafc;
             margin-bottom: 1rem;
@@ -326,12 +344,6 @@
             margin-top: 12px;
         }
 
-        /* Contact Section */
-        .contact-details {
-            margin-bottom: 2rem;
-        }
-
-        /* Modal styles */
         .modal-content select {
             width: 100%;
             padding: 12px;
@@ -397,7 +409,6 @@
             border: 0;
         }
 
-        /* Footer */
         footer {
             background: #0a1c2a;
             color: #cddfe7;
@@ -436,7 +447,6 @@
             font-size: 0.8rem;
         }
 
-        /* MODAL / POPUP STYLES - CENTERED */
         .modal {
             display: none;
             position: fixed;
@@ -561,9 +571,14 @@
         .bg-gray-light { background: #f8fbfd; }
         .text-center { text-align: center; }
 
-        /* ============================================ */
-        /* RESPONSIVE: Mobile column layout for About section & images */
-        /* ============================================ */
+        /* =========== FULLY RESPONSIVE: NO HORIZONTAL SCROLL, VERTICAL IMAGES ========== */
+        @media (max-width: 1024px) {
+            .container { padding: 0 20px; }
+            .hero-content h1 { font-size: 2.4rem; }
+            .logo img { max-height: 60px; }
+            .cert-image img { max-width: 150px; }
+        }
+
         @media (max-width: 900px) {
             .nav-links {
                 display: none;
@@ -573,196 +588,91 @@
                 gap: 1rem;
                 padding: 1rem 0;
             }
-            .nav-links.show {
-                display: flex;
-            }
-            .mobile-menu {
-                display: block;
-            }
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            .hero-grid {
-                flex-direction: column;
-            }
-            .hero-content {
-                width: 100%;
-            }
+            .nav-links.show { display: flex; }
+            .mobile-menu { display: block; }
+            .hero-grid { flex-direction: column; }
+            .hero-content h1 { font-size: 2rem; }
+            .navbar { flex-wrap: wrap; }
+            .logo { flex: 1; }
+            .cert-image img { max-width: 160px; }
         }
 
-        /* Mobile: About wrapper becomes column, images remain vertical (already vertical) */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .about-wrapper {
+        /* From 375px to 912px — FULLY RESPONSIVE, NO SIDE SCROLL, vertical images */
+        @media (min-width: 375px) and (max-width: 912px) {
+            body, html { overflow-x: hidden; width: 100%; }
+            .container { padding: 0 20px; width: 100%; max-width: 100%; overflow-x: hidden; }
+            .hero, .section, footer { overflow-x: hidden; }
+            .hero-content h1 { font-size: 1.8rem; word-break: break-word; }
+            .hero-content p { font-size: 0.9rem; }
+            .section-title { font-size: 1.8rem; }
+            .section-title:after { width: 55px; }
+            .cards { grid-template-columns: 1fr; gap: 1.5rem; }
+            .about-wrapper { flex-direction: column; }
+            .cert-card { width: 100%; }
+            /* VERTICAL IMAGES STACK WITH GREAT VISIBILITY */
+            .cert-image {
                 flex-direction: column;
+                align-items: center;
+                gap: 20px;
             }
-            .cards {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                flex-direction: column;
-                text-align: center;
-            }
-            /* keep images vertical, adjust size on tablet */
             .cert-image img {
-                max-width: 100px;
+                max-width: 200px;
+                width: auto;
+                margin: 0 auto;
             }
+            .logo img { max-height: 55px; }
+            .logo p { font-size: 0.65rem; }
+            .cta-group .btn { padding: 8px 14px; font-size: 0.7rem; }
+            .trust-badge span { font-size: 0.7rem; }
+            .info-card { font-size: 0.85rem; }
+            .footer-grid { flex-direction: column; text-align: center; }
+            .map-full { height: 280px; }
+            .modal-content { width: 95%; padding: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 1.7rem; }
+            .section-title { font-size: 1.6rem; }
+            .cert-image img { max-width: 180px; }
+            .logo img { max-height: 50px; }
+            .navbar { padding: 0.5rem 0; }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 16px; }
+            .hero { padding: 2rem 0; }
+            .hero-content h1 { font-size: 1.5rem; }
+            .cta-group { gap: 0.6rem; flex-wrap: wrap; }
+            .btn { padding: 8px 16px; font-size: 0.7rem; }
+            .cert-image img { max-width: 170px; }
+            .section { padding: 2.5rem 0; }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 0 16px;
-            }
-            .hero {
-                padding: 2rem 0;
-            }
-            .hero-content h1 {
-                font-size: 1.5rem !important;
-            }
-            .hero-badge {
-                font-size: 0.7rem;
-            }
-            .cta-group {
-                gap: 0.75rem;
-            }
-            .btn {
-                padding: 8px 16px;
-                font-size: 0.7rem;
-            }
-            .trust-badge span {
-                font-size: 0.65rem;
-                padding: 4px 10px;
-            }
-            .section {
-                padding: 2.5rem 0;
-            }
-            .section-title {
-                font-size: 1.5rem !important;
-            }
-            .section-title:after {
-                width: 50px;
-                height: 3px;
-            }
-            .about-main h3 {
-                font-size: 1.1rem;
-            }
-            .about-main p {
-                font-size: 0.85rem;
-            }
-            .cert-card {
-                padding: 1rem;
-            }
-            .card {
-                padding: 1.2rem;
-            }
-            .card h3 {
-                font-size: 1rem;
-            }
-            .card p {
-                font-size: 0.8rem;
-            }
-            .price-card {
-                padding: 1rem;
-            }
-            .faq-item {
-                padding: 0.8rem 1rem;
-            }
-            .faq-question {
-                font-size: 0.85rem;
-            }
-            .map-full {
-                height: 250px;
-            }
-            .modal-content {
-                padding: 1.2rem;
-                width: 95%;
-            }
-            .modal-content h3 {
-                font-size: 1.2rem;
-            }
-            .cert-image img {
-                max-width: 85px;
-            }
+            .hero-content h1 { font-size: 1.4rem; }
+            .hero-badge { font-size: 0.7rem; }
+            .trust-badge span { font-size: 0.6rem; padding: 4px 8px; }
+            .section-title { font-size: 1.4rem; }
+            .cert-image img { max-width: 200px; }
+            .logo img { max-height: 45px; }
+            .logo p { font-size: 0.6rem; white-space: normal; text-align: left; }
+            .navbar { gap: 10px; }
+            .card { padding: 1rem; }
+            .price-card { padding: 1rem; }
+            .modal-content { padding: 1.2rem; }
         }
 
         @media (max-width: 375px) {
-            .hero-content h1 {
-                font-size: 1.3rem !important;
-            }
-            .hero-content p {
-                font-size: 0.8rem;
-            }
-            .btn {
-                padding: 6px 12px;
-                font-size: 0.65rem;
-            }
-            .section-title {
-                font-size: 1.3rem !important;
-            }
-            .cert-image img {
-                max-width: 75px;
-            }
+            .hero-content h1 { font-size: 1.3rem; }
+            .container { padding: 0 12px; }
+            .cert-image img { max-width: 180px; }
+            .logo img { max-height: 40px; }
+            .btn { padding: 6px 12px; font-size: 0.65rem; }
         }
 
-        /* Landscape mode fix */
-        @media (max-width: 850px) and (orientation: landscape) {
-            .hero {
-                padding: 1.5rem 0;
-            }
-            .hero-grid {
-                gap: 1rem;
-            }
-            .section {
-                padding: 1.5rem 0;
-            }
-            .modal-content {
-                max-height: 85vh;
-                overflow-y: auto;
-            }
+        @media (orientation: landscape) and (max-height: 500px) {
+            .hero { padding: 1rem 0; }
+            .section { padding: 1.5rem 0; }
+            .cert-image img { max-width: 130px; }
+            .modal-content { max-height: 85vh; }
         }
-@media (max-width: 900px) {
-    .cert-image img {
-        max-width: 200px;  /* Even larger on tablet */
-        padding: 12px;
-    }
-}
-
-@media (max-width: 768px) {
-    .cert-image {
-        gap: 20px;
-    }
-    .cert-image img {
-        max-width: 220px;  /* Bigger on mobile */
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .cert-image {
-        gap: 18px;
-    }
-    .cert-image img {
-        max-width: 260px;  /* LARGEST on small phones - clear and readable */
-        padding: 12px;
-        border-radius: 20px;
-    }
-}
-
-@media (max-width: 375px) {
-    .cert-image img {
-        max-width: 240px;  /* Slightly smaller but still very large */
-        padding: 10px;
-    }
-}
-
-/* Landscape mode - maintain good size */
-@media (max-width: 850px) and (orientation: landscape) {
-    .cert-image img {
-        max-width: 160px;
-    }
-}
