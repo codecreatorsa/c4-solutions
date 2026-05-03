@@ -1,3 +1,4 @@
+
         * {
             margin: 0;
             padding: 0;
@@ -237,6 +238,12 @@
 
         .about-main h3 {
             margin-top: 1.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .about-main p {
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .cert-card {
@@ -251,6 +258,11 @@
 
         .cert-card i {
             font-size: 2rem;
+        }
+        
+        .cert-card p {
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         /* IMAGES COVER FULL DIV - FULLY RESPONSIVE, STRETCH TO CONTAINER WIDTH */
@@ -304,6 +316,16 @@
             color: #1e88a8;
             margin-bottom: 1rem;
         }
+        
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
 
         .price-card {
             background: #fff;
@@ -318,6 +340,16 @@
             font-size: 2rem;
             color: #1e88a8;
         }
+        
+        .price-card h3 {
+            font-size: 1.3rem;
+            margin: 0.75rem 0;
+        }
+        
+        .price-card p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
 
         .faq-item {
             background: #f8fafc;
@@ -331,6 +363,7 @@
             font-weight: 700;
             display: flex;
             justify-content: space-between;
+            font-size: 1.05rem;
         }
 
         .faq-answer {
@@ -338,6 +371,8 @@
             overflow: hidden;
             transition: 0.3s;
             color: #2c3e44;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .faq-item.active .faq-answer {
@@ -427,6 +462,11 @@
             margin-right: 8px;
             width: 24px;
         }
+        
+        .contact-info p {
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
 
         .legal-links {
             margin-top: 1rem;
@@ -436,6 +476,7 @@
             color: #cddfe7;
             margin-right: 1.5rem;
             text-decoration: none;
+            font-size: 0.85rem;
         }
 
         .footer hr {
@@ -572,12 +613,15 @@
         .bg-gray-light { background: #f8fbfd; }
         .text-center { text-align: center; }
 
-        /* =========== FULLY RESPONSIVE: IMAGES COVER THE WHOLE DIV WIDTH ========== */
+        /* =========== RESPONSIVE: EXPANDED TEXTS FOR ALL SCREEN SIZES (ESPECIALLY MOBILE) ========== */
+        
+        /* Tablet and medium screens */
         @media (max-width: 1024px) {
             .container { padding: 0 20px; }
             .hero-content h1 { font-size: 2.4rem; }
             .logo img { max-height: 60px; }
-            .cert-image img { width: 100%; max-width: 100%; padding: 10px; }
+            .about-main p, .card p, .cert-card p { font-size: 1rem; }
+            .section-title { font-size: 2rem; }
         }
 
         @media (max-width: 900px) {
@@ -595,74 +639,98 @@
             .hero-content h1 { font-size: 2rem; }
             .navbar { flex-wrap: wrap; }
             .logo { flex: 1; }
-            .cert-image img { width: 100%; padding: 12px; }
         }
 
-        /* For all screen sizes 375px to 912px: images cover the whole card width */
-        @media (min-width: 375px) and (max-width: 912px) {
+        /* MOBILE: FROM 320px to 912px - EXPANDED TEXT, LARGER READABLE FONTS */
+        @media (min-width: 320px) and (max-width: 912px) {
             body, html { overflow-x: hidden; width: 100%; }
             .container { padding: 0 20px; width: 100%; max-width: 100%; }
-            .hero-content h1 { font-size: 1.8rem; word-break: break-word; }
+            
+            /* Bigger, more readable text on mobile */
+            .hero-content h1 { font-size: 1.9rem; line-height: 1.25; }
+            .hero-content p { font-size: 1rem; line-height: 1.5; }
+            .hero-badge { font-size: 0.75rem; }
+            
             .section-title { font-size: 1.8rem; }
-            .cards { grid-template-columns: 1fr; }
+            .section-title:after { width: 55px; }
+            
+            .about-main h3 { font-size: 1.35rem; }
+            .about-main p { font-size: 1rem; line-height: 1.55; }
+            
+            .card h3 { font-size: 1.3rem; }
+            .card p { font-size: 0.95rem; line-height: 1.5; }
+            
+            .price-card h3 { font-size: 1.25rem; }
+            .price-card p { font-size: 0.9rem; }
+            
+            .cert-card p { font-size: 0.95rem; }
+            
+            .faq-question { font-size: 1rem; }
+            .faq-answer { font-size: 0.9rem; }
+            
+            .contact-info p { font-size: 0.9rem; }
+            .legal-links a { font-size: 0.8rem; }
+            
+            .cards { grid-template-columns: 1fr; gap: 1.5rem; }
             .about-wrapper { flex-direction: column; }
             .cert-card { width: 100%; }
-            /* CRITICAL: IMAGES SPAN FULL WIDTH OF .cert-card */
-            .cert-image {
-                width: 100%;
-                gap: 20px;
-            }
-            .cert-image img {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                object-fit: cover;
-                padding: 12px;
-                margin: 0 auto;
-                display: block;
-            }
+            
+            /* IMAGES COVER FULL WIDTH */
+            .cert-image { width: 100%; gap: 20px; }
+            .cert-image img { width: 100%; max-width: 100%; padding: 12px; }
+            
             .logo img { max-height: 55px; }
-            .logo p { font-size: 0.65rem; }
-            .cta-group .btn { padding: 8px 14px; font-size: 0.7rem; }
-            .trust-badge span { font-size: 0.7rem; }
+            .logo p { font-size: 0.7rem; }
+            .cta-group .btn { padding: 10px 16px; font-size: 0.8rem; }
+            .trust-badge span { font-size: 0.7rem; padding: 5px 12px; }
             .map-full { height: 280px; }
+            .btn, .btn-outline { font-size: 0.85rem; padding: 10px 20px; }
         }
 
-        @media (max-width: 768px) {
+        /* Small mobile devices (375px to 480px) - even more expanded text */
+        @media (max-width: 480px) {
             .hero-content h1 { font-size: 1.7rem; }
+            .hero-content p { font-size: 0.95rem; }
             .section-title { font-size: 1.6rem; }
-            .cert-image img { width: 100%; padding: 10px; }
-            .logo img { max-height: 50px; }
-        }
-
-        @media (max-width: 600px) {
+            .about-main h3 { font-size: 1.25rem; }
+            .about-main p { font-size: 0.95rem; }
+            .card h3 { font-size: 1.2rem; }
+            .card p { font-size: 0.9rem; }
+            .price-card h3 { font-size: 1.2rem; }
+            .cert-card p { font-size: 0.9rem; }
+            .faq-question { font-size: 0.95rem; }
+            .btn, .btn-outline { font-size: 0.8rem; padding: 8px 16px; }
+            .logo img { max-height: 48px; }
             .container { padding: 0 16px; }
             .hero { padding: 2rem 0; }
-            .hero-content h1 { font-size: 1.5rem; }
-            .cta-group { gap: 0.6rem; }
-            .btn { padding: 8px 16px; font-size: 0.7rem; }
             .section { padding: 2.5rem 0; }
-            .cert-image img { width: 100%; padding: 10px; }
+            .cert-image img { padding: 10px; }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 { font-size: 1.4rem; }
-            .section-title { font-size: 1.4rem; }
-            .cert-image img { width: 100%; padding: 10px; }
-            .logo img { max-height: 45px; }
-            .logo p { font-size: 0.6rem; }
-        }
-
+        /* Very small devices (375px and below) */
         @media (max-width: 375px) {
-            .hero-content h1 { font-size: 1.3rem; }
+            .hero-content h1 { font-size: 1.5rem; }
+            .hero-content p { font-size: 0.9rem; }
+            .section-title { font-size: 1.4rem; }
+            .about-main h3 { font-size: 1.2rem; }
+            .card h3 { font-size: 1.15rem; }
+            .btn { padding: 6px 14px; font-size: 0.75rem; }
+            .logo img { max-height: 42px; }
             .container { padding: 0 12px; }
-            .cert-image img { width: 100%; padding: 8px; }
-            .logo img { max-height: 40px; }
+            .cert-image img { padding: 8px; }
         }
 
+        /* Landscape mode adjustments */
         @media (orientation: landscape) and (max-height: 500px) {
-            .hero { padding: 1rem 0; }
+            .hero { padding: 1.5rem 0; }
             .section { padding: 1.5rem 0; }
-            .cert-image img { width: 80%; max-width: 280px; margin: 0 auto; }
+            .cert-image img { max-width: 90%; margin: 0 auto; }
             .modal-content { max-height: 85vh; }
+        }
+        
+        /* Extra large screens - keep text comfortable */
+        @media (min-width: 1400px) {
+            .container { max-width: 1320px; }
+            .hero-content h1 { font-size: 3rem; }
+            .about-main p, .card p { font-size: 1.05rem; }
         }
