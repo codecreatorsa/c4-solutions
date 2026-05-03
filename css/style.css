@@ -1,5 +1,4 @@
-
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -205,7 +204,7 @@
             margin-top: 10px;
         }
 
-        /* About Section - CRITICAL: flex column on mobile via media query */
+        /* About Section - flex column on mobile via media query */
         .about-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -233,27 +232,35 @@
             font-size: 2rem;
         }
 
-        /* Certification image styling */
+        /* Certification image styling - VERTICAL LAYOUT (column) */
         .cert-image {
             margin-top: 1.5rem;
-            text-align: center;
             border-top: 1px solid #e0e8f0;
             padding-top: 1.5rem;
+            /* VERTICAL flex column instead of horizontal row */
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .cert-image img {
-            max-width: 90px;
+            max-width: 110px;
+            width: 100%;
             height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             object-fit: contain;
             background: white;
-            padding: 4px;
+            padding: 8px;
+            display: block;
+        }
+
+        .cert-image img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.15);
         }
 
         /* Cards Grid */
@@ -556,7 +563,7 @@
         .text-center { text-align: center; }
 
         /* ============================================ */
-        /* RESPONSIVE: Mobile column layout for About section (display flex column) */
+        /* RESPONSIVE: Mobile column layout for About section & images */
         /* ============================================ */
         @media (max-width: 900px) {
             .nav-links {
@@ -584,7 +591,7 @@
             }
         }
 
-        /* CRITICAL: on mobile (max-width: 768px) force .about-wrapper to display:flex with column direction */
+        /* Mobile: About wrapper becomes column, images remain vertical (already vertical) */
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 1.8rem;
@@ -592,7 +599,6 @@
             .section-title {
                 font-size: 1.8rem;
             }
-            /* About wrapper becomes column layout for mobile: flex-direction column */
             .about-wrapper {
                 flex-direction: column;
             }
@@ -603,14 +609,9 @@
                 flex-direction: column;
                 text-align: center;
             }
+            /* keep images vertical, adjust size on tablet */
             .cert-image img {
-                max-width: 75px;
-                margin: 0;
-                display: inline-block;
-            }
-            .cert-image {
-                gap: 10px;
-                justify-content: center;
+                max-width: 100px;
             }
         }
 
@@ -686,7 +687,7 @@
                 font-size: 1.2rem;
             }
             .cert-image img {
-                max-width: 65px;
+                max-width: 85px;
             }
         }
 
@@ -705,7 +706,7 @@
                 font-size: 1.3rem !important;
             }
             .cert-image img {
-                max-width: 60px;
+                max-width: 75px;
             }
         }
 
