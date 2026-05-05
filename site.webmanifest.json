@@ -3,17 +3,22 @@
     "short_name": "C4Tech",
     "icons": [
         {
-            "src": "/images/image_png1.png",
-            "sizes": "32x32",
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/images/image_png.png",
-            "sizes": "16x16",
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-96x96.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "theme_color": "#1e88a8",
+    "theme_color": "#0a2540",
     "background_color": "#ffffff",
     "display": "standalone"
 }
